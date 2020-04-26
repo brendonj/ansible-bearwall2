@@ -1,0 +1,17 @@
+---
+- name: restart bearwall2
+  service:
+    name: bearwall2
+    state: restarted
+
+- name: try bearwall2
+  command: "bearwall2 try"
+  register: bearwall_try
+
+- name: commit bearwall2
+  command: "bearwall2 commit"
+
+- name: restart ulogd2
+  service:
+    name: ulogd2
+    state: restarted
