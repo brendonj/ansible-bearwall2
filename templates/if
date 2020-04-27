@@ -2,10 +2,8 @@
 # {{ ansible_managed }}
 
 {% if 'policies' in item %}
-  {% for policy in item['policies'] %}
-{{ policy }}
-  {% endfor %}
-{% endif %}
+{{ item['policies'] }}
+{% endif -%}
 
 {% if 'if_features' in item and item['if_features'] is iterable %}
   {% for if_feature, value in item['if_features'] | dictsort %}

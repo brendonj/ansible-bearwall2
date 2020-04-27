@@ -26,9 +26,9 @@ Available variables are listed below, see `defaults/main.yml` for default values
 
         bearwall2_classes:
           - name: internal
-            policies:
-              - policy inout accept
-              - policy forward accept
+            policies: |
+              policy inout accept
+              policy forward accept
             if_features:
               disable_ipv6: 0
               autoconf: 1
@@ -65,8 +65,8 @@ Available variables are listed below, see `defaults/main.yml` for default values
 
            bearwall2_interfaces:
              - name: eth0
-               policies:
-                 - policy inout accept
+               policies: |
+                 policy inout accept
                if_features:
                  disable_ipv6: 0
                  autoconf: 0
