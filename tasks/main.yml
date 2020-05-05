@@ -35,18 +35,6 @@
     - ansible_distribution == "Debian"
     - ansible_distribution_release == "buster"
 
-- name: Check kernel version
-  fail:
-      msg: "Warning: kernel version should be >= 5.2 for nat to work, detected version: {{ ansible_kernel }}"
-  ignore_errors: yes
-  when: ansible_kernel is version('5.2', '<')
-
-- name: Check nftables version
-  fail:
-      msg: "Warning: nftables version should be >= 0.9.1 for nat to work, detected version: {{ ansible_facts.packages['nftables'][0]['version'] }}"
-  ignore_errors: yes
-  when: ansible_facts.packages['nftables'][0]['version'] is version('0.9.1', '<')
-
 - name: Import bearwall packaging GPG signing key
   apt_key:
     url: "https://bintray.com/user/downloadSubjectPublicKey?username=bearwall"
@@ -63,6 +51,18 @@
       - bearwall2
       - ulogd2
     state: present
+
+- name: Check kernel version
+  fail:
+      msg: "Warning: kernel version should be >= 5.2 for nat to work, detected version: {{ ansible_kernel }}"
+  ignore_errors: yes
+  when: ansible_kernel is version('5.2', '<')
+
+- name: Check nftables version
+  fail:
+      msg: "Warning: nftables version should be >= 0.9.1 for nat to work, detected version: {{ ansible_facts.packages['nftables'][0]['version'] }}"
+  ignore_errors: yes
+  when: ansible_facts.packages['nftables'][0]['version'] is version('0.9.1', '<')
 
 - name: Configure ulogd2
   template:
