@@ -9,11 +9,12 @@
   changed_when: false
   register: get_dpkg_host_architecture
 
-- set_fact:
+- name: Set dpkg host architecture fact
+  set_fact:
     dpkg_host_architecture: "{{ get_dpkg_host_architecture.stdout }}"
   when: get_dpkg_host_architecture.rc == 0
 
-- name: Backport kernel and nftables on debian buster
+- name: Enable debian backports on debian buster
   apt_repository:
     filename: "debian-backports"
     repo: "deb {{ debian_mirror }} {{ debian_backports_components }}"
@@ -29,7 +30,8 @@
     name:
       - linux-image-{{ dpkg_host_architecture }}
       - nftables
-    state: present
+    default_release: "{{ ansible_distribution_release }}-backports"
+    state: latest
   when:
     - bearwall2_backport_kernel_nftables
     - ansible_distribution == "Debian"
