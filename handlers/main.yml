@@ -1,12 +1,15 @@
 ---
-- name: restart bearwall2
-  service:
-    name: bearwall2
-    state: restarted
 
 - name: try bearwall2
   command: "bearwall2 try"
-  register: bearwall_try
+  notify: "test connectivity bearwall2"
+
+- name: test connectivity bearwall2
+  wait_for_connection:
+    delay: 2
+    timeout: 15
+  changed_when: True
+  notify: commit bearwall2
 
 - name: commit bearwall2
   command: "bearwall2 commit"
