@@ -39,6 +39,7 @@
 
 - name: Import bearwall packaging GPG signing key
   apt_key:
+    id: "6ABA09963E518866C29FA6C10F0921E4A2D0D6AE"
     url: "https://bintray.com/user/downloadSubjectPublicKey?username=bearwall"
     state: present
 
