@@ -37,15 +37,25 @@
     - ansible_distribution == "Debian"
     - ansible_distribution_release == "buster"
 
-- name: Import bearwall packaging GPG signing key
+- name: Remove bearwall2 bintray repository
+  apt_repository:
+    repo: "deb https://dl.bintray.com/bearwall/bearwall2 {{ ansible_distribution_release }} main"
+    state: absent
+
+- name: Remove bearwall2 bintray GPG signing key
   apt_key:
     id: "6ABA09963E518866C29FA6C10F0921E4A2D0D6AE"
-    url: "https://bintray.com/user/downloadSubjectPublicKey?username=bearwall"
+    state: absent
+
+- name: Import bearwall2 cloudsmith GPG signing key
+  apt_key:
+    id: "C704B6DE77346EBAE0D229DA26EA35E7A5ED1FFE"
+    url: "https://dl.cloudsmith.io/public/bearwall/bearwall2/gpg.26EA35E7A5ED1FFE.key"
     state: present
 
-- name: Add bearwall2 repository
+- name: Add bearwall2 cloudsmith repository
   apt_repository:
-    repo: "deb https://dl.bintray.com/bearwall/bearwall2 {{ansible_distribution_release}} main"
+    repo: "deb https://dl.cloudsmith.io/public/bearwall/bearwall2/deb/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} main"
     state: present
 
 - name: Install packages
