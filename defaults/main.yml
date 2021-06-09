@@ -12,3 +12,4 @@ bearwall2_options:
 
 bearwall2_enable_backports: false
 bearwall2_backport_kernel_nftables: false
+bearwall2_try_rules: true

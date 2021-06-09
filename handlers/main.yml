@@ -3,6 +3,7 @@
 - name: try bearwall2
   command: "bearwall2 try"
   notify: "test connectivity bearwall2"
+  when: bearwall2_try_rules
 
 - name: test connectivity bearwall2
   wait_for_connection:
