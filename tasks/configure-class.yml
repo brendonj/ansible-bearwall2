@@ -4,4 +4,4 @@
   template:
     src: if
     dest: "/etc/bearwall2/classes.d/{{ item.name }}"
-  notify: try bearwall2
+  notify: apply bearwall2

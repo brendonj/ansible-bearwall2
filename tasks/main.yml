@@ -87,7 +87,7 @@
   template:
     src: "bearwall2.conf"
     dest: "/etc/bearwall2/bearwall2.conf"
-  notify: try bearwall2
+  notify: apply bearwall2
 
 - name: Configure bearwall2 rulesets
   include_tasks: configure-ruleset.yml

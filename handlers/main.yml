@@ -1,8 +1,15 @@
 ---
 
+- name: dry-run bearwall2
+  command: "bearwall2 dry-run"
+  when: bearwall2_dry_run
+  listen: "apply bearwall2"
+
 - name: try bearwall2
   command: "bearwall2 try"
   notify: "test connectivity bearwall2"
+  when: not bearwall2_dry_run
+  listen: "apply bearwall2"
 
 - name: test connectivity bearwall2
   wait_for_connection:
